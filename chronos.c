@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:27:02 by amejia            #+#    #+#             */
-/*   Updated: 2023/04/13 15:24:45 by amejia           ###   ########.fr       */
+/*   Updated: 2023/04/14 22:14:53 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,32 @@ int	timediff(struct timeval tim1, struct timeval tim2)
 	return (w / 1000);
 }
 
-void *chronos(void *params)
+void	*chronos(void *params)
 {
-	t_parameters *gparams;
-	
+	t_parameters	*gparams;
+
 	gparams = (t_parameters *)params;
-	gettimeofday(&(gparams->actual_time), NULL);
-	gparams->time_start = gparams->actual_time;
-	while (gparams->stop == 0)
+	while (start_checker(gparams) == 0)
 	{
 		gettimeofday(&(gparams->actual_time), NULL);
-		usleep(3333);
+		gparams->time_start = gparams->actual_time;
+	}
+	while (stop_checker(gparams) == 0)
+	{
+		pthread_mutex_lock(&(gparams->time_mutex));
+		gettimeofday(&(gparams->actual_time), NULL);
+		pthread_mutex_unlock(&(gparams->time_mutex));
+		usleep(300);
 	}
 	return (NULL);
+}
+
+int	timediffs(t_parameters *gparams, struct timeval time)
+{
+	struct timeval stime;
+	
+	pthread_mutex_lock(&(gparams->time_mutex));
+	stime = gparams->actual_time;
+	pthread_mutex_unlock(&(gparams->time_mutex));
+	return (timediff(stime,time));
 }

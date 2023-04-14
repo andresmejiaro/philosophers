@@ -6,7 +6,7 @@
 #    By: amejia <amejia@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 14:12:43 by amejia            #+#    #+#              #
-#    Updated: 2023/04/13 15:29:11 by amejia           ###   ########.fr        #
+#    Updated: 2023/04/15 00:55:22 by amejia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,12 @@ NAME = philo
 
 NAME_DEBUG = philo_debug
 
-SRCS = utils.c main.c kharon.c chronos.c ganymede.c hermes.c philosopher.c \
-prepros.c
-
+SRCS = utils.c main.c kharon.c chronos.c ganymede.c philosopher.c \
+prepros.c prepros2.c prepros3.c exit.c
 
 OBJS = ${SRCS:.c=.o}
 
-#CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=thread -g
 
 all: $(NAME)
 
@@ -38,7 +37,7 @@ VS_debug: CFLAGS += -D DEBUG=1
 VS_debug: $(NAME_DEBUG)
 
 $(NAME): $(OBJS) 
-	$(CC) $(CFLAGS) $(OBJS) -o $@
+	$(CC) $(CFLAGS) $(OBJS) -o $@ 
 
 $(NAME_DEBUG): $(SRCS)
 	$(CC) $(CFLAGS) -fdiagnostics-color=always -g $(SRCS) -o $@
