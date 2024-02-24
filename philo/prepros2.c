@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 18:33:03 by amejia            #+#    #+#             */
-/*   Updated: 2023/04/15 00:42:07 by amejia           ###   ########.fr       */
+/*   Updated: 2023/04/15 23:58:20 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,20 @@ void	check_params(t_parameters *params)
 	k = 0;
 }
 
-void muted_print(char *str, int *numb, t_parameters *gparams)
+void	muted_print(char *str, int *numb, t_parameters *gparams)
 {
+	int	auth;
+
+	auth = 0;
 	pthread_mutex_lock(&(gparams->print_mutex));
 	if (gparams->print == 1)
-		printf(str, numb[0], numb[1]);
-	if (numb[3] == 1)
+		auth = 1;
+	if (numb[2] == 1)
 		gparams->print = 0;
+	if (auth == 1)
+	{
+		numb[0] = timediffs(gparams, gparams->time_start);
+		printf(str, numb[0], numb[1]);
+	}
 	pthread_mutex_unlock(&(gparams->print_mutex));
 }

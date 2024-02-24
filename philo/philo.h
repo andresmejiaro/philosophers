@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:25:22 by amejia            #+#    #+#             */
-/*   Updated: 2023/04/15 00:43:38 by amejia           ###   ########.fr       */
+/*   Updated: 2023/04/19 18:25:10 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_parameters {
 	pthread_t		*threads;
 	int				start;
 	int				stop;
-	int 			print;
+	int				print;
 	void			*philo_params;
 	int				error;
 }	t_parameters;
@@ -63,7 +63,9 @@ int		ft_strncmp(char *s1, char *s2, unsigned int n);
 int		start_checker(t_parameters *gparams);
 int		stop_checker(t_parameters *gparams);
 int		timediffs(t_parameters *gparams, struct timeval time);
-void 	muted_print(char *str, int *numb, t_parameters *gparams);
+void	muted_print(char *str, int *numb, t_parameters *gparams);
+int		check_food(t_parameters *gparams, t_philo_params *philo_params);
+int		n_ate_checker(t_parameters *gparams, t_philo_params philo_params);
 
 // params
 void	check_params(t_parameters *params);

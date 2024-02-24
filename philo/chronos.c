@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:27:02 by amejia            #+#    #+#             */
-/*   Updated: 2023/04/14 22:14:53 by amejia           ###   ########.fr       */
+/*   Updated: 2023/04/15 17:20:04 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ int	timediff(struct timeval tim1, struct timeval tim2)
 
 	w = 1000000 * (tim1.tv_sec - tim2.tv_sec) + tim1.tv_usec - tim2.tv_usec;
 	return (w / 1000);
+}
+
+int	timediffexact(struct timeval tim1, struct timeval tim2)
+{
+	long	w;
+
+	w = 1000000 * (tim1.tv_sec - tim2.tv_sec) + tim1.tv_usec - tim2.tv_usec;
+	return (w);
 }
 
 void	*chronos(void *params)
@@ -42,10 +50,10 @@ void	*chronos(void *params)
 
 int	timediffs(t_parameters *gparams, struct timeval time)
 {
-	struct timeval stime;
-	
+	struct timeval	stime;
+
 	pthread_mutex_lock(&(gparams->time_mutex));
 	stime = gparams->actual_time;
 	pthread_mutex_unlock(&(gparams->time_mutex));
-	return (timediff(stime,time));
+	return (timediff(stime, time));
 }

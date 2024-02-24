@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:46:01 by amejia            #+#    #+#             */
-/*   Updated: 2023/04/14 23:11:35 by amejia           ###   ########.fr       */
+/*   Updated: 2023/04/19 18:07:46 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ int	check_digit_str(char *str)
 	return (1);
 }
 
+int	check_valid2(int argc)
+{
+	if (argc < 5 || argc > 6)
+		return (1);
+	return (0);
+}
+
 int	check_valid(int argc, char **argv)
 {
 	int	cnt[2];
@@ -57,10 +64,10 @@ int	check_valid(int argc, char **argv)
 			else
 				return (1);
 		}
-		if (signs > 1 || !check_digit_str(argv[cnt[0]]) || argc < 5 || argc > 6)
+		if (signs > 1 || !check_digit_str(argv[cnt[0]]))
 			return (1);
 	}
-	return (0);
+	return (check_valid2(argc));
 }
 
 void	exit_error_read(int mem_param, t_parameters *params)
@@ -72,4 +79,3 @@ void	exit_error_read(int mem_param, t_parameters *params)
 	if (mem_param == 0)
 		printf("Error: Memory Error.\n");
 }
-

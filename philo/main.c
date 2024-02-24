@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:23:58 by amejia            #+#    #+#             */
-/*   Updated: 2023/04/14 20:00:02 by amejia           ###   ########.fr       */
+/*   Updated: 2023/04/15 17:10:45 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ void	launch_threads(t_parameters *params, t_philo_params *philo_params)
 
 	pthread_create(&(params->threads[params->n_fork]), NULL, chronos, \
 		(void *)params);
-	pthread_create(&(params->threads[params->n_fork + 1]), NULL, ganymede, \
-		(void *)params);
 	pthread_create(&(params->threads[params->n_fork + 2]), NULL, kharon, \
+		(void *)params);
+	usleep(200);
+	pthread_create(&(params->threads[params->n_fork + 1]), NULL, ganymede, \
 		(void *)params);
 	ct = 1;
 	while (ct <= params->n_fork)

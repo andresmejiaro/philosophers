@@ -6,17 +6,17 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 23:10:42 by amejia            #+#    #+#             */
-/*   Updated: 2023/04/15 00:32:39 by amejia           ###   ########.fr       */
+/*   Updated: 2023/04/15 23:49:03 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void start_params3(t_parameters *params, t_philo_params *philo_params)
+void	start_params3(t_parameters *params, t_philo_params *philo_params)
 {
 	int				ct;
 	struct timeval	time;
-	
+
 	ct = 1;
 	gettimeofday(&time, NULL);
 	while (ct <= params->n_fork && philo_params != NULL \
@@ -37,18 +37,17 @@ void start_params3(t_parameters *params, t_philo_params *philo_params)
 
 void	start_params2(t_parameters *params, t_philo_params *philo_params)
 {
-
 	params->counter = malloc(params->n_fork * sizeof(pthread_mutex_t));
+	params->print = 1;
 	params->stop = 0;
 	params->start = 0;
 	params->philo_params = philo_params;
-	params->print = 1;
 	pthread_mutex_init(&(params->time_mutex), NULL);
 	pthread_mutex_init(&(params->start_mutex), NULL);
 	pthread_mutex_init(&(params->stop_mutex), NULL);
 	pthread_mutex_init(&(params->write_mutex), NULL);
 	pthread_mutex_init(&(params->print_mutex), NULL);
-	start_params3(params,philo_params);
+	start_params3(params, philo_params);
 }
 
 void	start_params(int argc, char **argv, t_parameters *params, \

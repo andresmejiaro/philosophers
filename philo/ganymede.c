@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:27:08 by amejia            #+#    #+#             */
-/*   Updated: 2023/04/14 22:13:44 by amejia           ###   ########.fr       */
+/*   Updated: 2023/04/15 17:23:07 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	*ganymede(void *params)
 
 int	start_checker(t_parameters *gparams)
 {
-	int k;
-	
+	int	k;
+
 	pthread_mutex_lock(&(gparams->start_mutex));
 	k = gparams->start;
 	pthread_mutex_unlock(&(gparams->start_mutex));
@@ -72,8 +72,8 @@ int	start_checker(t_parameters *gparams)
 
 int	stop_checker(t_parameters *gparams)
 {
-	int k;
-	
+	int	k;
+
 	pthread_mutex_lock(&(gparams->stop_mutex));
 	k = gparams->stop;
 	pthread_mutex_unlock(&(gparams->stop_mutex));

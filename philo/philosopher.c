@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:27:25 by amejia            #+#    #+#             */
-/*   Updated: 2023/04/15 00:53:13 by amejia           ###   ########.fr       */
+/*   Updated: 2023/04/19 18:53:20 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	philo_think2(t_philo_params *truep, int next)
 		pthread_mutex_lock(&(truep->params->forks[next]));
 		if (stop_checker(truep->params) == 1)
 			return ;
-		k[0] = timediffs(truep->params, truep->params->time_start);
 		truep->time_ate = truep->params->actual_time;
 		truep->state = 2;
 		pthread_mutex_lock(&(truep->params->counter[truep->id -1]));
@@ -54,7 +53,6 @@ void	philo_think(t_philo_params *truep)
 	pthread_mutex_lock(&(truep->params->forks[truep->id - 1]));
 	if (stop_checker(truep->params) == 1)
 		return ;
-	k[0] = timediffs(truep->params, truep->params->time_start);
 	k[1] = truep->id;
 	k[2] = 0;
 	muted_print("%d ms philo %d took a fork\n", k, truep->params);
@@ -80,13 +78,12 @@ void	philo_eat(t_philo_params *truep)
 			next = 0;
 		pthread_mutex_unlock(&(truep->params->forks[truep->id - 1]));
 		pthread_mutex_unlock(&(truep->params->forks[next]));
-		k[0] = timediffs(truep->params, truep->params->time_start);
 		k[1] = truep->id;
 		k[2] = 0;
 		muted_print("%d ms philo %d is sleeping\n", k, truep->params);
 		truep->time_slept = truep->params->actual_time;
 		truep->state = 1;
-		usleep(truep->params->time_sleep * 990);
+		usleep(truep->params->time_sleep * 1000);
 	}
 }
 
@@ -97,7 +94,6 @@ void	philo_sleep(t_philo_params *truep)
 	k[0] = timediffs(truep->params, truep->time_slept);
 	if (k[0] > truep->params->time_sleep && stop_checker(truep->params) == 0)
 	{
-		k[0] = timediffs(truep->params, truep->params->time_start);
 		k[1] = truep->id;
 		k[2] = 0;
 		muted_print("%d ms philo %d is thinking\n", k, truep->params);

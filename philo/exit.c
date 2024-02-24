@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 23:11:58 by amejia            #+#    #+#             */
-/*   Updated: 2023/04/14 23:13:15 by amejia           ###   ########.fr       */
+/*   Updated: 2023/04/15 20:41:04 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	free_memory(t_parameters *params, t_philo_params *philo_params)
 {
+	free(params->counter);
 	free(params->threads);
 	free(params->forks);
 	free(params->lights);
 	free(philo_params);
 }
+
 void	join_threads(t_parameters *params)
 {
 	int	k;
